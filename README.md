@@ -180,7 +180,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Contact
 
-**Hari Patel** - [GitHub](https://github.com/haripatel07) | [LinkedIn](https://linkedin.com/in/haripatel87)
+*Hari Patel** - [GitHub](https://github.com/haripatel07) | [LinkedIn](https://linkedin.com/in/haripatel87)
 
 **Het Patel** - [GitHub](https://github.com/hetpatel) | [LinkedIn](https://linkedin.com/in/het-patel)
 
