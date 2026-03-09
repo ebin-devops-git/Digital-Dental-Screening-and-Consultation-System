@@ -1,6 +1,7 @@
-# Connect to GKE cluster
 steps:
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+
+# Connect to GKE
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: gcloud
   args:
     - container
@@ -10,6 +11,7 @@ steps:
     - --region
     - asia-south1
 
+# Debug workspace
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: bash
   args:
@@ -18,7 +20,6 @@ steps:
       echo "Listing files in workspace"
       ls -R
 
-
 # Apply Kubernetes manifests
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
@@ -26,6 +27,7 @@ steps:
     - apply
     - -f
     - Kubernetes/
+    - -R
 
 # Update backend image
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -44,7 +46,6 @@ steps:
     - image
     - deployment/frontend-deployment
     - node-frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
-
 
 options:
   logging: CLOUD_LOGGING_ONLY
