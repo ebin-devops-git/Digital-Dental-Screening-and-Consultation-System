@@ -19,33 +19,32 @@ steps:
       ls -R
 
 
+# Apply Kubernetes manifests
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
   args:
     - apply
     - -f
     - Kubernetes/
-    - -R
 
-
-# Update backend deployment image
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+# Update backend image
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
   args:
     - set
     - image
-    - deployment/dental-backend
-    - backend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
+    - deployment/backend-deployment
+    - python-backend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
 
-
-# Update frontend deployment image
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+# Update frontend image
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
   args:
     - set
     - image
-    - deployment/dental-frontend
-    - frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
+    - deployment/frontend-deployment
+    - node-frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
