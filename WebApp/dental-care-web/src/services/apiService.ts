@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'https://haripatel07-dental-care.hf.space';
+const baseUrl = 'https://dental-backend-1095890003554.asia-south1.run.app';
 
 export const fetchArticles = async () => {
   const response = await axios.get(`${baseUrl}/content/articles/`);
