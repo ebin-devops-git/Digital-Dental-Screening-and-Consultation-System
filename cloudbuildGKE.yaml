@@ -11,6 +11,14 @@ steps:
     - asia-south1
 
 
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: kubectl
+  args:
+    - apply
+    - -f
+    - kubernetes/  
+
+
 # Update backend deployment image
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: kubectl
