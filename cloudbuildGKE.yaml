@@ -24,7 +24,7 @@ steps:
   args:
     - apply
     - -f
-    - kubernetes/  
+    - Kubernetes/
 
 
 # Update backend deployment image
