@@ -1,5 +1,34 @@
 steps:
 
+# Build backend image
+- name: gcr.io/cloud-builders/docker
+  args:
+    - build
+    - -t
+    - asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
+    - ./Backend
+
+# Push backend image
+- name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
+
+# Build frontend image
+- name: gcr.io/cloud-builders/docker
+  args:
+    - build
+    - -t
+    - asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
+    - ./WebApp/dental-care-web
+
+# Push frontend image
+- name: gcr.io/cloud-builders/docker
+  args:
+    - push
+    - asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
+
+
 # Connect to GKE
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: gcloud
@@ -11,14 +40,6 @@ steps:
     - --region
     - asia-south1
 
-# Debug workspace
-- name: gcr.io/google.com/cloudsdktool/cloud-sdk
-  entrypoint: bash
-  args:
-    - -c
-    - |
-      echo "Listing files in workspace"
-      ls -R
 
 # Apply Kubernetes manifests
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
@@ -29,6 +50,7 @@ steps:
     - Kubernetes/
     - -R
 
+
 # Update backend image
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
@@ -38,6 +60,7 @@ steps:
     - deployment/backend-deployment
     - python-backend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
 
+
 # Update frontend image
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
@@ -46,6 +69,7 @@ steps:
     - image
     - deployment/frontend-deployment
     - node-frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
+
 
 options:
   logging: CLOUD_LOGGING_ONLY
