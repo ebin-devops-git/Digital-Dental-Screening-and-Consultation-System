@@ -5,7 +5,7 @@
     - container
     - clusters
     - get-credentials
-    - dental-cluster
+    - dentalk8scluster
     - --region
     - asia-south1
 
