@@ -10,6 +10,14 @@ steps:
     - --region
     - asia-south1
 
+- name: gcr.io/google.com/cloudsdktool/cloud-sdk
+  entrypoint: bash
+  args:
+    - -c
+    - |
+      echo "Listing files in workspace"
+      ls -R
+
 
 - name: gcr.io/google.com/cloudsdktool/cloud-sdk
   entrypoint: kubectl
