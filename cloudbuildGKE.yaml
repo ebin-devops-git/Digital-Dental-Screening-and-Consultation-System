@@ -25,6 +25,7 @@ steps:
     - apply
     - -f
     - Kubernetes/
+    - -R
 
 
 # Update backend deployment image
