@@ -1,0 +1,30 @@
+# Connect to GKE cluster
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: gcloud
+  args:
+    - container
+    - clusters
+    - get-credentials
+    - dental-cluster
+    - --region
+    - asia-south1
+
+
+# Update backend deployment image
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: kubectl
+  args:
+    - set
+    - image
+    - deployment/dental-backend
+    - backend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
+
+
+# Update frontend deployment image
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+  entrypoint: kubectl
+  args:
+    - set
+    - image
+    - deployment/dental-frontend
+    - frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
