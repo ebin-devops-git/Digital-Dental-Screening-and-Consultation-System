@@ -1,6 +1,7 @@
 import { useState } from "react";
-import { TextField, IconButton, CircularProgress } from "@mui/material";
+import { Box, TextField, IconButton, CircularProgress, Typography } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
+import NavBar from "../components/Navbar";
 import ChatMessage from "../components/ChatMessage";
 import QuickSuggestions from "../components/QuickSuggestions";
 import { sendChatbotMessage } from "../services/apiService";
@@ -19,7 +20,6 @@ export default function Chatbot() {
       setMessages((prev) => [...prev, { sender: "bot", text: reply }]);
     } catch (e: any) {
       let errorMsg = "Error connecting to chatbot";
-
       if (e?.response?.data?.reply) {
         errorMsg = e.response.data.reply;
       } else if (e?.response?.data?.message) {
@@ -27,7 +27,6 @@ export default function Chatbot() {
       } else if (e?.message) {
         errorMsg = e.message;
       }
-
       setMessages((prev) => [
         ...prev,
         { sender: "bot", text: errorMsg },
@@ -41,16 +40,13 @@ export default function Chatbot() {
     <div className="chatbot-gradient">
       <div className="chatbot-container">
         <div className="chatbot-header">Dental Chatbot</div>
-
         <div className="chatbot-messages">
           {messages.map((m, i) => (
             <ChatMessage key={i} sender={m.sender} text={m.text} />
           ))}
           {loading && <CircularProgress size={20} />}
         </div>
-
         <QuickSuggestions onSelect={sendMessage} />
-
         <div className="chatbot-input-row">
           <TextField
             fullWidth
@@ -64,7 +60,6 @@ export default function Chatbot() {
               }
             }}
           />
-
           <IconButton
             color="primary"
             onClick={() => {
