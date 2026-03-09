@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: frontend-ingress
 spec:
   rules:
-  - host: 
+  - host:
     http:
       paths:
       - pathType: Prefix
