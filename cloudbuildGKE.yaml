@@ -29,3 +29,6 @@ steps:
     - image
     - deployment/dental-frontend
     - frontend=asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/webapp:$SHORT_SHA
+
+options:
+  logging: CLOUD_LOGGING_ONLY
