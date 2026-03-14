@@ -14,20 +14,7 @@ steps:
     - push
     - 'asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA'
 
-# Deploy to Cloud Run
-- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
-  entrypoint: gcloud
-  args:
-    - run
-    - deploy
-    - dental-backend
-    - --image
-    - asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA
-    - --region
-    - asia-south1
-    - --platform=managed
-    - --memory=2Gi 
-    - --allow-unauthenticated
+
 
 images:
 - 'asia-south1-docker.pkg.dev/$PROJECT_ID/dental-repo/backend:$SHORT_SHA'
